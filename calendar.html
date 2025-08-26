@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexa - Calendar</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="calendar.css">
+</head>
+<body>
+
+<!-- Calendar Panel -->
+    <div class="calendar-panel">
+        <p style="font-size: 40px; margin-bottom: 1px;"><i class="bi bi-calendar-event-fill"></i> <strong>Calendar</strong></p>
+        <h2>From reminders to results — Nexa keeps you on track</h2>
+        <div class="calendar-header">
+            <button id="prevMonth">&lt;</button>
+            <h3 id="monthYear"></h3>
+            <button id="nextMonth">&gt;</button>
+        </div>
+        <div class="weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
+        <div id="calendar" class="calendar"></div>
+
+        <div class="date-time">
+            <input type="date" id="datePicker">
+            <input type="time" id="timePicker">
+            <input type="text" id="occasionInput" placeholder="Enter occasion description">
+            <select id="occasionType" class="form-select">
+                <option value="🎂">🎂 Birthday</option>
+                <option value="💖">💖 Anniversary</option>
+                <option value="📅">📅 Meeting</option>
+                <option value="🏖️">🏖️ Holiday</option>
+                <option value="🎉">🎉 Party</option>
+                <option value="🕛">🕛 Conference</option>
+                <option value="🍽️">🍽️ Dinner</option>
+                <option value="💊">💊 Doctor Appointment</option>
+                <option value="🛍️">🛍️ Shopping</option>
+                <option value="🏃">🏃 Workout</option>
+                <option value="💼">💼 Work Deadline</option>
+                <option value="🖥️">🖥️ Coding Session</option>
+                <option value="📚">📚 Study Time</option>
+                <option value="📖">📖 Book Reading</option>
+                <option value="✈️">✈️ Travel</option>
+                <option value="🛏️">🛏️ Rest Day</option>
+                <option value="🎤">🎤 Karaoke Night</option>
+                <option value="🛠️">🛠️ Home Repair</option>
+                <option value="🐾">🐾 Pet Care</option>
+                <option value="🥳">🥳 Celebration</option>
+                <option value="🍰">🍰 Baking Day</option>
+                <option value="🧹">🧹 Cleaning Day</option>
+                <option value="🎮">🎮 Gaming</option>
+                <option value="🌳">🌳 Picnic</option>
+                <option value="🍿">🍿 Movie Marathon</option>
+                <option value="🖌️">🖌️ Art & Craft</option>
+                <option value="🎶">🎶 Music Practice</option>
+                <option value="🧘">🧘 Yoga</option>
+                <option value="🌙">🌙 Stargazing</option>
+                <option value="🚗">🚗 Road Trip</option>
+                <option value="🏟️">🏟️ Sports Event</option>
+                <option value="📷">📷 Photography</option>
+
+            </select>
+
+            <button class="add-btn" id="addBtn" >Add Occasion</button>
+        </div>
+        <div class="selected-date-section">
+            <h2 id="taskTitle">Occasions for Selected Date</h2>
+            <div id="taskList"></div>
+            <button class="delete-all" id="deleteAllBtn">Delete All Occasions for This Date</button>
+        </div>
+    </div>
+ 
+
+<!-- Tasks Panel -->
+    <div class="tasks-panel">
+        <!-- Selected Date Occasions -->
+        
+
+        <!-- All Occasions -->
+        <div class="all-occasions-section">
+            <h2 id="allOcassions">All Occasions</h2>
+            <button id="clearAllBtn" class="btn btn-warning mt-3" style="margin-bottom: 10px;">Clear All</button>
+            <div id="allOccasionsList"></div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <a href="index.html"><button class="sidebar-btn" style="margin-bottom: 10px;"> <i class="bi bi-journal-text"></i> Home</button></a>
+        <a href="plan.html"><button class="sidebar-btn" style="margin-bottom: 10px;"><i class="bi bi-pie-chart"></i> Plan</button></a>
+        <a href="pomodoro.html"><button class="sidebar-btn" style="margin-bottom: 10px;"><i class="bi bi-alarm-fill"></i>Pomodoro</button></a>
+        <a href="spinner.html"><button class="sidebar-btn" style="margin-bottom: 10px;"><i class="bi bi-arrow-repeat"></i> Spinner</button></a>
+
+        <!-- Dark Mode Toggle -->
+        <label class="dark-mode-switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <div id="reminderAlert" >
+        <span id="reminderText"></span>
+        <button id="closeReminder">Close</button>
+    </div>
+    <audio id="reminderSound" src="./preview.mp3" preload="auto"></audio>
+
+
+
+
+<script src="calendar.js"></script>
+</body>
+</html>

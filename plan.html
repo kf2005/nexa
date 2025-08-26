@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Nexa - Planner</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+    <link rel="stylesheet" href="plan.css">
+</head>
+<body>
+    
+    <div class="container">
+        <header>
+            <!-- ✨ Glam Navigation -->
+             <div class="nav-container">
+                <nav class="nav-buttons">
+                    <a href="index.html" class="nav-btn"><i class="bi bi-journal-text"></i> Home</a>
+                    <a href="calendar.html" class="nav-btn"><i class="bi bi-calendar-event-fill"></i> Calendar</a>
+                    <a href="pomodoro.html" class="nav-btn"><i class="bi bi-alarm-fill"></i>Pomodoro</a>
+                    <a href="spinner.html" class="nav-btn"><i class="bi bi-arrow-repeat"></i> Spinner</a>
+                </nav>
+                <div class="theme-toggle">
+                    <label class="switch">
+                        <input type="checkbox" id="dark-mode-toggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span style="margin-left: 8px;"></span>
+                </div>
+
+             </div>
+            <h1><i class="bi bi-pie-chart"></i> Categorize Your Tasks With Nexa </h1>
+            <p class="subtitle">Advanced task management with custom categories and analytics</p>
+        </header>
+
+
+        <div class="welcome-container">
+            <div class="user-greeting">
+                <div class="user-info">
+                    <div class="user-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <h2>Welcome, <span id="username" >Guest</span>!</h2>
+                        <p>Organize your tasks with custom categories</p>
+                    </div>
+                </div>
+                <button id="edit-name-btn" class="btn">
+                    <i class="fas fa-edit"></i> Edit Name
+                </button>
+            </div>
+        </div>
+
+        <div class="app-container">
+            <div class="todo-section">
+                <h2 class="section-title"><i class="fas fa-list-check"></i> Task Manager</h2>
+                
+                <div class="input-group">
+                    <div class="input-row">
+                        <input type="text" id="todo-input" placeholder="Enter a new task...">
+                        <select id="category-select">
+                            <!-- Categories will be populated dynamically -->
+                        </select>
+                        <button id="add-btn"><i class="fas fa-plus"></i> Add Task</button>
+                    </div>
+                </div>
+                
+                <div class="category-management">
+                    <h3><i class="fas fa-tags"></i> Manage Categories</h3>
+                    <div class="category-form">
+                        <input type="text" id="new-category" placeholder="New category name">
+                        <button id="add-category-btn">Add Category</button>
+                    </div>
+                    <div class="category-tags" id="category-tags">
+                        <!-- Category tags will be added here -->
+                    </div>
+                </div>
+                
+
+
+
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-tasks">0</div>
+                        <div class="stat-label">Total Tasks</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="completed-tasks">0</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="pending-tasks">0</div>
+                        <div class="stat-label">Pending</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="categories-count">0</div>
+                        <div class="stat-label">Categories</div>
+                    </div>
+                </div>
+
+                <!-- ✅ New Filter Dropdown -->
+                <div class="filter-section" style="margin: 15px 0;">
+                    <label for="filter-category"><strong>Filter by Category:</strong></label>
+                    <select id="filter-category">
+                        <option value="all">All</option>
+                        <!-- Categories will be added dynamically -->
+                    </select>
+                </div>
+                
+                <ul id="todo-list">
+                    <!-- Todo items will be generated dynamically -->
+                </ul>
+            </div>
+            
+            <div class="chart-section">
+                <h2 class="section-title"><i class="fas fa-chart-pie"></i> Task Analytics</h2>
+                <div class="chart-container">
+                    <canvas id="category-chart"></canvas>
+                </div>
+                
+                <div class="chart-container" style="margin-top: 30px; height: 250px;">
+                    <canvas id="completion-chart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p> | Nexa with Analytics | <span id="task-counter">0</span> tasks managed</p>
+        </footer>
+    </div>
+
+    <!-- Name Edit Modal -->
+    <div class="modal" id="name-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Your Name</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="name-input" placeholder="Enter your name">
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn btn-secondary" id="cancel-name">Cancel</button>
+                <button class="modal-btn btn-primary" id="save-name">Save</button>
+            </div>
+        </div>
+    </div>
+    <script src="plan.js"></script>
+</body>
+</html>

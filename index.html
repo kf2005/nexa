@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexa - Daily List</title>
+
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+
+<link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1><i class="bi bi-check2-square"></i> Nexa</h1>
+            <select id="moodSelect">
+                <option value="">Mood</option>
+                <option value="happy">😊 Happy</option>
+                <option value="focused">🎯 Focused</option>
+                <option value="relaxed">😌 Relaxed</option>
+                <option value="stressed">😖 Stressed</option>
+                <option value="nostalgic">🌨️ Nostalgic</option>
+                <option value="angry">😡 Angry</option>
+            </select>
+            <button class="special-white"><i class="bi bi-lightning-charge-fill"></i> Surprise Me</button>
+        </div>
+        <div class="dark-toggle">
+            <i id="modeIcon" class="bi bi-sun-fill"></i>
+            <input type="checkbox" id="modeToggle">
+        </div>
+    </header>
+
+    <div class="sidebar">
+        <a href="calendar.html"><button class="special-white" style="margin-bottom: 10px;"><i class="bi bi-calendar-event-fill"></i> Calendar</button></a>
+        <a href="plan.html"><button class="special-white" style="margin-bottom: 10px;"><i class="bi bi-pie-chart"></i> Plan</button></a>
+        <a href="pomodoro.html"><button class="special-white" style="margin-bottom: 10px;"><i class="bi bi-alarm-fill"></i> Pomodoro</button></a>
+        <a href="spinner.html"><button class="special-white" style="margin-bottom: 10px;"><i class="bi bi-arrow-repeat"></i> Spinner</button></a>
+    </div>
+
+    <div id="mainContainer">
+        <main>
+            <h2><i class="bi bi-journal-text"></i> Your Daily Tasks</h2>
+            <div class="todo-input">
+                <input type="text" id="taskInput" placeholder="Add a new task...">
+                <select id="taskCategory">
+                    <option value="today">Today</option>
+                    <option value="tomorrow">Tomorrow</option>
+                    <option value="later">Later</option>
+                </select>
+                <button id="addTask"><i class="bi bi-plus-circle-fill"></i> Add</button>
+            </div>
+
+            <div class="todo-section">
+                <h3>Today</h3>
+                <ul class="todo-list" id="todayList"></ul>
+                <button id="todayDoneBtn" style="margin-bottom:10px; display:none;">Today's Work Done</button>
+
+            </div>
+
+            <div class="todo-section">
+                <h3>Tomorrow</h3>
+                <ul class="todo-list" id="tomorrowList"></ul>
+            </div>
+
+            <div class="todo-section">
+                <h3>Later</h3>
+                <ul class="todo-list" id="laterList"></ul>
+            </div>
+            <div id="bottomButtons">
+                <button id="completeAllBtn">All Tasks Completed</button>
+                <button id="undoBtn" disabled>Undo</button>
+            </div>
+        
+
+        </main>
+        <div class="suggestions-section" style="margin-top: 30px;">
+            <h3><i class="bi bi-lightbulb-fill"></i> Suggestions For You</h3>
+            <ul id="suggestionsList" style="list-style:none; padding-left:0;"></ul>
+            <button id="clearSuggestionsBtn" style="margin-top: 10px;">Clear Suggestions</button>
+        </div>
+        <div id="dateModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5);
+            justify-content:center; align-items:center; z-index:1000;">
+            <div style="background:white; padding:20px; border-radius:8px; text-align:center; min-width:250px;">
+                <p>Please select a due date for 'Later' task:</p>
+                <input type="date" id="datePicker" style="margin-bottom:15px; width:100%;"/>
+                <br/>
+                <button id="dateOk" style="margin-right:10px;">OK</button>
+                <button id="dateCancel">Cancel</button>
+            </div>
+         </div>
+        <!-- Chat Assistant Container -->
+        <div id="chatAssistant">
+            <div id="chatHeader">
+                <i class="bi bi-flower1"></i> Chat Assistant
+            </div>
+            <div id="chatMessages"></div>
+            <form id="chatForm">
+                <input id="chatInput" type="text" placeholder="Type your message..." autocomplete="off" />
+                <button type="submit">Send</button>
+            </form>
+        </div>
+
+    </div>
+    <div id="customAlert">
+        <p id="customAlertMessage"></p>
+        <button id="customAlertOk">OK</button>
+    </div>
+
+
+    <script src="./index.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,636 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+/* Smooth fade-in animation for the whole app */
+.calendar-panel, .tasks-panel {
+    animation: fadeSlideIn 0.8s ease;
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Left Calendar Panel */
+.calendar-panel {
+    width: 60%;
+    padding: 20px;
+    background: linear-gradient(to bottom, #ffe4ec, #fff0f5);
+    border-right: 3px solid #ffb6c1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 4px 0 25px rgba(255, 182, 193, 0.4);
+    border-radius: 0 20px 20px 0;
+}
+
+/* Calendar header */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.calendar-header button {
+    background: linear-gradient(135deg, #ff69b4, #ff85c1);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+}
+.calendar-header button:hover {
+    background: linear-gradient(135deg, #ff85c1, #ff69b4);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 14px rgba(255, 105, 180, 0.5);
+}
+.calendar-header button:active {
+    transform: scale(0.95);
+}
+
+.calendar-header h3 {
+    margin: 0;
+    color: #ff1493;
+    font-size: 1.6rem;
+}
+
+/* Weekday headers */
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+.weekdays div {
+    text-align: center;
+    font-weight: bold;
+    color: #ff1493;
+    letter-spacing: 1px;
+}
+
+/* Calendar grid */
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    width: 100%;
+}
+
+.calendar div {
+    padding: 14px;
+    text-align: center;
+    border-radius: 12px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 182, 193, 0.35);
+    animation: fadeInCell 0.4s ease;
+}
+@keyframes fadeInCell {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.calendar div:hover {
+    background: linear-gradient(135deg, #ffb6c1, #ff85c1);
+    color: white;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
+}
+
+.calendar .selected {
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.6);
+}
+
+.calendar .empty {
+    background-color: transparent;
+    cursor: default;
+    box-shadow: none;
+}
+
+/* Date and time inputs */
+.date-time {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.date-time input,
+#occasionType {
+    padding: 10px;
+    border: 2px solid #ffb6c1;
+    border-radius: 10px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+#occasionType {
+    font-size: 1rem;
+    background-color: #fff0f5;
+    cursor: pointer;
+}
+#occasionType:hover {
+    background-color: #ffe4ec;
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px rgba(255, 182, 193, 0.4);
+}
+#occasionType:focus {
+    outline: none;
+    box-shadow: 0 0 10px #ff69b4;
+}
+
+/* Add button */
+.add-btn {
+    background: linear-gradient(135deg, #ff69b4, #ff85c1);
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+}
+.add-btn:hover {
+    background: linear-gradient(135deg, #ff85c1, #ff69b4);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(255, 105, 180, 0.5);
+}
+.add-btn:active {
+    transform: scale(0.95);
+}
+
+/* Right Task Panel */
+.tasks-panel {
+    flex: 1;
+    padding: 20px;
+    background: #ffffff;
+    overflow-y: auto;
+    box-shadow: inset 0 0 12px rgba(255, 182, 193, 0.2);
+}
+
+/* Occasion/task item */
+.task {
+    padding: 10px;
+    background: linear-gradient(135deg, #ffe4ec, #ffd6e2);
+    margin-bottom: 12px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(255, 182, 193, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.task:hover {
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(255, 182, 193, 0.5);
+}
+.task button {
+    background: linear-gradient(135deg, #ff69b4, #ff85c1);
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+.task button:hover {
+    background: linear-gradient(135deg, #ff85c1, #ff69b4);
+    transform: scale(1.1);
+}
+
+/* Delete all button */
+.delete-all, #clearAllBtn {
+    background: linear-gradient(135deg, #ff1493, #ff69b4);
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+}
+.delete-all:hover, #clearAllBtn:hover {
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(255, 105, 180, 0.5);
+}
+.delete-all:active, #clearAllBtn:active {
+    transform: scale(0.95);
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 12px;
+    background: linear-gradient(180deg, rgba(255, 192, 203, 0.3), rgba(255, 182, 193, 0.1));
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.sidebar-btn {
+    padding: 10px;
+    border: none;
+    background: linear-gradient(145deg, #ffafbd, #ffc3a0);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 12px rgba(255, 105, 135, 0.3);
+    text-decoration: none;
+}
+
+.sidebar-btn i {
+    font-size: 18px;
+}
+
+.sidebar-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(255, 105, 135, 0.5);
+    background: linear-gradient(145deg, #ff758c, #ff7eb3);
+}
+.sidebar a {
+    text-decoration: none;
+    color: inherit;
+}
+.sidebar a:hover {
+    text-decoration: none;
+}
+
+#allOcassions {
+    margin-top: 65px;
+}
+/* Dark mode toggle container */
+.dark-mode-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    margin-top: 10px;
+}
+
+/* Hide default checkbox */
+.dark-mode-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Slider track */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+    transition: 0.4s;
+}
+
+/* Slider circle */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+/* Checked state */
+.dark-mode-switch input:checked + .slider {
+    background: linear-gradient(145deg, #444, #666);
+}
+
+.dark-mode-switch input:checked + .slider:before {
+    transform: translateX(26px);
+}
+body.dark-mode {
+    background: #0a0a0a; /* Pure deep black */
+    color: #f7eaea;      /* Soft pinkish-white for contrast */
+    transition: all 0.4s ease;
+}
+
+body.dark-mode .calendar-panel {
+    background: linear-gradient(145deg, #1a0000, #330000); /* Dark maroon gradient */
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+    border-radius: 15px;
+    transition: all 0.4s ease;
+}
+
+body.dark-mode .tasks-panel {
+    background: #1c0c0c;
+    box-shadow: inset 0 0 20px rgba(255, 0, 0, 0.1);
+    transition: all 0.4s ease;
+}
+
+body.dark-mode .calendar div {
+    background: linear-gradient(145deg, #2a0a0a, #4d0000);
+    color: #f7eaea;
+    box-shadow: 0 3px 8px rgba(255, 0, 0, 0.3);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .calendar div:hover {
+    background: #b30000;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(255, 0, 0, 0.6);
+}
+
+body.dark-mode .calendar div.selected {
+    background: #ff1a1a; /* Bright neon red */
+    color: #fff;
+    box-shadow: 0 0 15px #ff1a1a, 0 0 30px #ff4d4d;
+}
+
+body.dark-mode .task {
+    background: linear-gradient(145deg, #2a0a0a, #4d0000);
+    color: #f7eaea;
+    box-shadow: 0 2px 6px rgba(255, 0, 0, 0.3);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .task button {
+    background: linear-gradient(145deg, #660000, #990000);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .task button:hover {
+    background: linear-gradient(145deg, #cc0000, #ff3333);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(255, 0, 0, 0.6);
+}
+
+body.dark-mode .sidebar-btn {
+    background: linear-gradient(145deg, #330000, #660000);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+    border-radius: 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+body.dark-mode .sidebar-btn:hover {
+    background: linear-gradient(145deg, #990000, #ff1a1a);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.7);
+}
+
+body.dark-mode #occasionType {
+    background: linear-gradient(145deg, #330000, #660000);
+    color: #fff;
+    border: 1px solid #ff3333;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode #occasionType:hover {
+    background: #990000;
+    border-color: #ff1a1a;
+}
+
+body.dark-mode #clearAllBtn {
+    background: linear-gradient(145deg, #660000, #990000);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+body.dark-mode #clearAllBtn:hover {
+    background: linear-gradient(145deg, #cc0000, #ff1a1a);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 15px rgba(255, 0, 0, 0.7);
+}
+/* Only day cells get gradients and shadows */
+body.dark-mode .calendar div.day {
+    background: linear-gradient(145deg, #2a0a0a, #4d0000);
+    color: #f7eaea;
+    box-shadow: 0 3px 8px rgba(255, 0, 0, 0.3);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for day cells */
+body.dark-mode .calendar div.day:hover {
+    background: #b30000;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(255, 0, 0, 0.6);
+}
+
+/* Selected day */
+body.dark-mode .calendar div.day.selected {
+    background: #ff1a1a; 
+    color: #fff;
+    box-shadow: 0 0 15px #ff1a1a, 0 0 30px #ff4d4d;
+}
+
+/* Empty cells are subtle */
+body.dark-mode .calendar div.empty {
+    background: transparent;
+    box-shadow: none;
+    cursor: default;
+}
+body.dark-mode #addBtn {
+    background: linear-gradient(145deg, #660000, #990000);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+body.dark-mode #addBtn:hover {
+    background: linear-gradient(145deg, #cc0000, #ff1a1a);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 15px rgba(255, 0, 0, 0.7);
+}
+body.dark-mode #deleteAllBtn {
+    background: linear-gradient(145deg, #660000, #990000);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+body.dark-mode #deleteAllBtn:hover {
+    background: linear-gradient(145deg, #cc0000, #ff1a1a);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 15px rgba(255, 0, 0, 0.7);
+}
+body.dark-mode #prevMonth {
+    background: linear-gradient(145deg, #660000, #990000);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+body.dark-mode #prevMonth:hover {
+    background: linear-gradient(145deg, #cc0000, #ff1a1a);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 15px rgba(255, 0, 0, 0.7);
+}
+body.dark-mode #nextMonth {
+    background: linear-gradient(145deg, #660000, #990000);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+body.dark-mode #nextMonth:hover {
+    background: linear-gradient(145deg, #cc0000, #ff1a1a);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 15px rgba(255, 0, 0, 0.7);
+}
+body.dark-mode .weekdays div{
+    color: #f7eaea;
+    font-weight: bold;
+}
+body.dark-mode #monthYear{
+    color: #f7eaea;
+    font-weight: bold;
+}
+/* Reminder Alert Box - Light Mode */
+#reminderAlert {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ffe6f0; /* Soft pink background */
+    color: #660033; /* Deep rose text for contrast */
+    padding: 15px 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.6); /* Pink shadow */
+    animation: fadeIn 0.4s ease, shake 0.4s ease;
+}
+
+/* Close button styling - Light Mode */
+#closeReminder {
+    margin-left: 10px;
+    background: white;
+    color: #660033; /* Matches text color */
+    border: none;
+    border-radius: 5px;
+    padding: 5px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+#closeReminder:hover {
+    background: #ffccdd; /* Slightly darker pink */
+    color: #330019;
+}
+
+
+/* Reminder Alert Box - Dark Mode Neon Glow */
+/* Reminder Alert Box - Dark Mode (Maroon & Black) */
+body.dark-mode #reminderAlert {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #1a1a1a; /* Deep black background */
+    color: #fff; /* Maroon text */
+    padding: 15px 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 
+        0 0 10px rgba(128, 0, 0, 0.8), 
+        0 0 20px rgba(128, 0, 0, 0.6),
+        0 0 30px rgba(128, 0, 0, 0.4); /* Maroon glow */
+    animation: fadeIn 0.4s ease, shake 0.4s ease, maroonPulse 2s infinite;
+}
+
+/* Close button - Dark Mode */
+body.dark-mode #closeReminder {
+    margin-left: 10px;
+    background: #333; /* Dark button */
+    color: #fff; /* Maroon text */
+    border: none;
+    border-radius: 5px;
+    padding: 5px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 
+        0 0 5px rgba(128, 0, 0, 0.8), 
+        0 0 10px rgba(128, 0, 0, 0.6);
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.3s ease;
+}
+
+body.dark-mode #closeReminder:hover {
+    background: #800000; /* Maroon hover */
+    color: #fff; /* Dark text */
+    box-shadow: 
+        0 0 15px rgba(128, 0, 0, 1),
+        0 0 25px rgba(128, 0, 0, 0.8);
+}
+
+/* Maroon pulse animation */
+@keyframes maroonPulse {
+    0%, 100% {
+        box-shadow: 
+            0 0 10px rgba(128, 0, 0, 0.8), 
+            0 0 20px rgba(128, 0, 0, 0.6),
+            0 0 30px rgba(128, 0, 0, 0.4);
+    }
+    50% {
+        box-shadow: 
+            0 0 15px rgba(128, 0, 0, 1),
+            0 0 25px rgba(128, 0, 0, 0.8),
+            0 0 40px rgba(128, 0, 0, 0.6);
+    }
+}
+
+
+/* Animations (same as before) */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+
+

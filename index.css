@@ -1,0 +1,562 @@
+ :root {
+    /* Light Mode */
+    --bg-light: #ffe4ec;
+    --text-light: #333;
+    --accent-light: #ff8fb1;
+    --card-light: #fff;
+
+    /* Dark Mode */
+    --bg-dark: #121212;
+    --text-dark: #f5f5f5;
+    --accent-dark: #800000;
+    --card-dark: #1f1f1f;
+
+    --transition-speed: 0.3s;
+}
+
+/* ===== Global ===== */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    transition: background-color var(--transition-speed) ease,
+                color var(--transition-speed) ease;
+}
+
+body.dark {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+/* ===== Header ===== */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background-color: var(--accent-light);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: background-color var(--transition-speed) ease;
+}
+
+body.dark header {
+    background-color: var(--accent-dark);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+h1 {
+    font-size: 1.6em;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Dropdowns */
+select {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95em;
+}
+
+/* ===== Pretty Buttons ===== */
+button, .sidebar button {
+    background: linear-gradient(135deg, var(--accent-light), #ffb3c6);
+    color: #fff;
+    font-weight: bold;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.4s ease, 
+                transform 0.2s ease, 
+                box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(255, 143, 177, 0.4);
+}
+
+body.dark button, 
+body.dark .sidebar button {
+    background: linear-gradient(135deg, var(--accent-dark), #4d0c0c);
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(128, 0, 0, 0.4);
+}
+
+/* Hover Effect */
+button:hover, 
+.sidebar button:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(255, 143, 177, 0.6);
+}
+
+body.dark button:hover, 
+body.dark .sidebar button:hover {
+    box-shadow: 0 6px 12px rgba(128, 0, 0, 0.6);
+}
+
+/* Active/Click Effect */
+button:active, 
+.sidebar button:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 10px;
+    background-color: var(--accent-light);
+    height: 100%;
+    width: 170px;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    transition: background-color var(--transition-speed) ease;
+}
+
+body.dark .sidebar {
+    background-color: var(--accent-dark);
+}
+
+.sidebar a {
+    text-decoration: none;
+}
+
+/* ===== Dark Mode Toggle ===== */
+.dark-toggle {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.dark-toggle input[type="checkbox"] {
+    width: 42px;
+    height: 22px;
+    appearance: none;
+    background-color: #ccc;
+    border-radius: 22px;
+    position: relative;
+    outline: none;
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.dark-toggle input[type="checkbox"]:checked {
+    background-color: maroon;
+}
+
+.dark-toggle input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform var(--transition-speed) ease;
+}
+
+.dark-toggle input[type="checkbox"]:checked::before {
+    transform: translateX(20px);
+}
+
+/* ===== Main Content ===== */
+main {
+    margin-left: 190px;
+    padding: 20px;
+}
+
+/* ===== To-Do List ===== */
+.todo-section {
+    margin-bottom: 30px;
+}
+
+.todo-section h3 {
+    margin-bottom: 10px;
+}
+
+.todo-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.todo-input input, .todo-input select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    background: var(--card-light);
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    transition: background var(--transition-speed) ease;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+body.dark .todo-item {
+    background: var(--card-dark);
+}
+
+.todo-item.completed span {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.todo-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.todo-actions i {
+    cursor: pointer;
+    margin-left: auto;
+    color: crimson;
+    transition: transform 0.15s ease;
+}
+
+.todo-actions i:hover {
+    transform: scale(1.2);
+}
+/* Sidebar buttons that stay white in light mode */
+.sidebar button.special-white {
+    background: white;
+    color: var(--accent-light);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.sidebar button.special-white:hover {
+    background: #fff5f8;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Dark mode for these buttons */
+body.dark .sidebar button.special-white {
+    background: linear-gradient(135deg, var(--accent-dark), #4d0c0c);
+    color: white;
+    box-shadow: 0 4px 8px rgba(128, 0, 0, 0.4);
+}
+
+body.dark .sidebar button.special-white:hover {
+    background: #5a0f0f;
+}
+.todo-section {
+    background-color: white; /* stronger pink */
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 8px rgba(255, 143, 177, 0.4);
+    transition: background-color 0.3s ease;
+}
+
+body.dark .todo-section {
+    background-color: rgba(128, 0, 0, 0.4); /* stronger maroon */
+    box-shadow: 0 4px 8px rgba(128, 0, 0, 0.6);
+}
+
+.todo-section h3 {
+    margin-top: 0;
+    font-weight: 600;
+    color: var(--accent-light);
+}
+
+body.dark .todo-section h3 {
+    color: var(--text-dark);
+}
+#bottomButton{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;          /* fixes container at bottom right */
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+    justify-content: flex-end;
+}
+#mainContainer {
+    display: flex;
+    gap: 20px; /* spacing between main content and suggestions */
+}
+
+/* Your main content takes available space */
+main {
+    flex: 1;
+}
+.suggestions-section {
+  width: 280px;
+  max-height: 400px;       /* fixed max height */
+  overflow-y: auto;        /* scrollbar when content overflows */
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  color: var(--text-light);
+  background-color: var(--card-light);
+  transition: background-color 0.3s ease;
+  margin-right: 25px;
+  box-sizing: border-box;
+}
+
+/* Dark mode styles */
+body.dark .suggestions-section {
+  background-color: var(--card-dark);
+  color: var(--text-dark);
+}
+
+
+canvas.confetti-canvas {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none !important;
+  z-index: 9999 !important;
+}
+/* Light Mode */
+#customAlert {
+  display: none;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  background: white;
+  border-radius: 8px;
+  padding: 20px 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+  max-width: 300px;
+  text-align: center;
+  color: black;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#customAlertMessage {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+#customAlertOk {
+  padding: 8px 15px;
+  background: #ff69b4;  /* pink */
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#customAlertOk:hover {
+  background: #e0559e;  /* darker pink */
+}
+
+/* Dark Mode */
+body.dark #customAlert {
+  background: #222;             /* dark background */
+  color: #eee;                  /* light text */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+}
+
+body.dark #customAlertOk {
+  background: #800000;          /* maroon */
+}
+
+body.dark #customAlertOk:hover {
+  background: #660000;          /* darker maroon */
+}
+
+/* Light Mode */
+#chatAssistant {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  max-height: 210px; /* a bit taller for comfort */
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  z-index: 9999;
+  color: #333;
+}
+
+#chatHeader {
+  background: #ff69b4; /* hot pink */
+  color: white;
+  padding: 12px 15px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 10px 10px 0 0;
+  user-select: none;
+  box-shadow: 0 2px 5px rgba(255, 105, 180, 0.5);
+}
+
+#chatMessages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 15px;
+  font-size: 14px;
+  background: #fafafa;
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+  border-radius: 0 0 10px 10px;
+}
+
+#chatForm {
+  display: flex;
+  border-top: none;
+  padding: 10px 15px;
+  background: white;
+  border-radius: 0 0 10px 10px;
+}
+
+#chatInput {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  margin-right: 10px;
+}
+
+#chatInput:focus {
+  border-color: #ff69b4;
+}
+
+#submit {
+  background: linear-gradient(135deg, #ff69b4, #ffb3c6);
+  border: none;
+  color: white;
+  padding: 10px 18px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 3px 8px rgba(255, 105, 180, 0.5);
+  margin-left: 5px;
+}
+
+#submit:hover {
+  background: linear-gradient(135deg, #e64a84, #d17c91);
+  box-shadow: 0 4px 10px rgba(230, 74, 132, 0.6);
+}
+
+
+/* Dark Mode */
+body.dark #chatAssistant {
+  background: #2f2f2f;
+  border: 1px solid #550000;
+  box-shadow: 0 4px 15px rgba(85, 0, 0, 0.7);
+  color: #ddd;
+}
+
+body.dark #chatHeader {
+  background: #800000; /* maroon */
+  color: white;
+  padding: 12px 15px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 10px 10px 0 0;
+  user-select: none;
+  box-shadow: 0 2px 5px rgba(128, 0, 0, 0.6);
+}
+
+body.dark #chatMessages {
+  background: #3a3a3a;
+  color: #eee;
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 15px;
+  font-size: 14px;
+  border-bottom: 1px solid #550000;
+  border-top: 1px solid #550000;
+  border-radius: 0 0 10px 10px;
+}
+
+body.dark #chatForm {
+  display: flex;
+  border-top: none;
+  padding: 10px 15px;
+  background: #2f2f2f;
+  border-radius: 0 0 10px 10px;
+}
+
+body.dark #chatInput {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #550000;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+  background: #3a3a3a;
+  color: #eee;
+  transition: border-color 0.3s ease;
+  margin-right: 10px;
+}
+
+body.dark #chatInput:focus {
+  border-color: #800000;
+}
+
+body.dark #submit {
+  background: linear-gradient(135deg, #800000, #b33a3a);
+  border: none;
+  color: white;
+  padding: 10px 18px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 600;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 3px 8px rgba(179, 58, 58, 0.7);
+  margin-left: 5px;
+}
+
+body.dark #submit:hover {
+  background: linear-gradient(135deg, #5a0000, #7a1a1a);
+  box-shadow: 0 4px 10px rgba(122, 26, 26, 0.8);
+}
+
+.chat-message-user {
+    text-align: right;
+    color: #ff69b4;
+}
+
+.chat-message-bot {
+    text-align: left;
+    color: #333;
+}
+body.dark .chat-message-user {
+    text-align: right;
+    color: #e4c6c6;  /* maroon for your messages in dark mode */
+}
+
+body.dark .chat-message-bot {
+    text-align: left;
+    color: #ccc;     /* lighter gray for bot messages in dark mode */
+}
